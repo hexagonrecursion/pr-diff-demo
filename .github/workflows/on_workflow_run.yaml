@@ -14,3 +14,4 @@ jobs:
         with:
           repository: ${{github.event.workflow_run.head_repository.full_name}}
           ref: ${{github.event.workflow_run.head_commit.id}}
+          set-safe-directory: false
