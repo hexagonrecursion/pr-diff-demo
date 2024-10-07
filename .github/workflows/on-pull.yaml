@@ -10,11 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: date > hello.txt
-    - run: git diff --quiet && echo "has_diff=true" || echo "has_diff=false" >> "$GITHUB_OUTPUT"
-      id: has_diff1
-    - id: has_diff
-      run: |
-        true && echo "has_diff=true" || echo "has_diff=false" >> "$GITHUB_OUTPUT"
+    - run: git diff --quiet && (echo "has_diff=true" || echo "has_diff=false") >> "$GITHUB_OUTPUT"
+      id: has_diff
     - run: echo The selected color is ${{ steps.has_diff.outputs.has_diff }}
     - run: |
         mkdir build
