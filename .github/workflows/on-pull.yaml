@@ -19,6 +19,9 @@ jobs:
         name: diff
         path: build/diff.txt
       if: steps.has_diff.outputs.has_diff
-    - run: exit 1
+    - name: Report an error
+      run: |
+        echo The action edited files
+        cat build/diff.txt
+        exit 1
       if: steps.has_diff.outputs.has_diff
-    
