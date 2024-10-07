@@ -2,7 +2,7 @@ on:
   pull_request:
     branches:
     - main
-name: on-pull
+name: On pull
 jobs:
   on-pull:
     runs-on: ubuntu-24.04
