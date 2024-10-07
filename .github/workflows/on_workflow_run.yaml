@@ -4,6 +4,8 @@ on:
     - On pull
     types:
     - completed
+permissions:
+  contents: write
 jobs:
   on-failure:
     runs-on: ubuntu-24.04
