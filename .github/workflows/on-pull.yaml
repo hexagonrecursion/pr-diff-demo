@@ -13,6 +13,9 @@ jobs:
     - run: git add --intent-to-add .  # Make untracked files show up in the diff
     - run: git diff --quiet && echo "has_diff=true" >> "$GITHUB_OUTPUT" || echo "has_diff=false" >> "$GITHUB_OUTPUT"
       id: has_diff
+
+    - run: echo ${{ steps.has_diff.outputs.has_diff }}
+    
     - run: mkdir build && git diff > build/diff.txt
       if: steps.has_diff.outputs.has_diff
     - uses: actions/upload-artifact@v4
