@@ -10,6 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: date > hello.txt
+    - run: git add --intent-to-add .  # Make untracked files show up in the diff
     - run: git diff --quiet && (echo "has_diff=true" || echo "has_diff=false") >> "$GITHUB_OUTPUT"
       id: has_diff
     - run: mkdir build && git diff > build/diff.txt
@@ -22,8 +23,6 @@ jobs:
     - name: Report an error
       run: |
         echo The action edited files
-        git diff
         cat build/diff.txt
-        echo ZZZ
         exit 1
       if: steps.has_diff.outputs.has_diff
