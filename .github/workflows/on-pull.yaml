@@ -13,9 +13,7 @@ jobs:
     - run: git diff --quiet && (echo "has_diff=true" || echo "has_diff=false") >> "$GITHUB_OUTPUT"
       id: has_diff
     - run: echo The selected color is ${{ steps.has_diff.outputs.has_diff }}
-    - run: |
-        mkdir build
-        git diff > build/diff.txt
+    - run: mkdir build && git diff > build/diff.txt
       if: steps.has_diff.outputs.has_diff
     - uses: actions/upload-artifact@v4
       with:
