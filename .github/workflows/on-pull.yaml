@@ -22,6 +22,8 @@ jobs:
     - name: Report an error
       run: |
         echo The action edited files
+        git diff
         cat build/diff.txt
+        echo ZZZ
         exit 1
       if: steps.has_diff.outputs.has_diff
