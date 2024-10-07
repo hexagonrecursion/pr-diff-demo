@@ -11,21 +11,18 @@ jobs:
     - uses: actions/checkout@v4
     - run: date > hello.txt
     - run: git add --intent-to-add .  # Make untracked files show up in the diff
-    - run: git diff --quiet && echo "has_diff=true" >> "$GITHUB_OUTPUT" || echo "has_diff=false" >> "$GITHUB_OUTPUT"
+    - run: git diff --quiet && echo "has_diff=false" >> "$GITHUB_OUTPUT" || echo "has_diff=true" >> "$GITHUB_OUTPUT"
       id: has_diff
-
-    - run: echo ${{ steps.has_diff.outputs.has_diff }}
-    
     - run: mkdir build && git diff > build/diff.txt
-      if: steps.has_diff.outputs.has_diff
+      if: steps.has_diff.outputs.has_diff == 'true'
     - uses: actions/upload-artifact@v4
       with:
         name: diff
         path: build/diff.txt
-      if: steps.has_diff.outputs.has_diff
+      if: steps.has_diff.outputs.has_diff == 'true'
     - name: Report an error
       run: |
         echo The action edited files
         cat build/diff.txt
         exit 1
-      if: steps.has_diff.outputs.has_diff
+      if: steps.has_diff.outputs.has_diff == 'true'
