@@ -1,0 +1,21 @@
+on:
+  push:
+  pull_request:
+    branches:
+    - main
+name: on-pull
+jobs:
+  on-pull:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - run: date > hello.txt
+    - run: git diff --quiet && echo "has_diff=true" || echo "has_diff=false" >> "$GITHUB_OUTPUT"
+      id: has_diff
+    - run: git diff > build/diff.txt
+      if: steps.has_diff.outputs.has_diff
+    - uses: actions/upload-artifact@v4
+      with:
+        name: diff
+        path: build/diff.txt
+      if: steps.has_diff.outputs.has_diff
