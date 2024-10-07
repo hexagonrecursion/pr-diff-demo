@@ -23,8 +23,8 @@ jobs:
     - name: Report an error
       run: |
         echo The action edited files
-        echo =================================
+        echo ============ BEGIN DIFF ============
         cat build/diff.txt
-        echo =================================
+        echo ============= END DIFF =============
         exit 1
       if: steps.has_diff.outputs.has_diff == 'true'
