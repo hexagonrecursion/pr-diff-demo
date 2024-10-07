@@ -22,5 +22,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git add .
           git commit -m 'Automatic changes'
-          git remote add upstream '${{ github.repository }}'
+          git remote add upstream '${{ github.repositoryUrl }}'
           git push upstream HEAD:untrusted-hello
