@@ -13,7 +13,7 @@ jobs:
     - run: git diff --quiet && echo "has_diff=true" || echo "has_diff=false" >> "$GITHUB_OUTPUT"
       id: has_diff1
     - id: has_diff
-      run: echo "has_diff=true" >> "$GITHUB_OUTPUT"
+      run: true && echo "has_diff=true" || echo "has_diff=false" >> "$GITHUB_OUTPUT"
     - run: echo The selected color is ${{ steps.has_diff.outputs.has_diff }}
     - run: |
         mkdir build
