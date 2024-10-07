@@ -8,8 +8,7 @@ jobs:
   on-pull:
     runs-on: ubuntu-24.04
     steps:
-    - name: Set color
-      id: color-selector
+    - id: color-selector
       run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
     - run: echo The selected color is ${{ steps.color-selector.outputs.SELECTED_COLOR }}
 
