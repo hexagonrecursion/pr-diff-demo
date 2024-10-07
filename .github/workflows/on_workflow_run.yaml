@@ -4,9 +4,24 @@ on:
     - On pull
     types:
     - completed
+permissions:
+  contents: write
 jobs:
   on-failure:
     runs-on: ubuntu-24.04
     if: github.event.workflow_run.conclusion == 'failure'
     steps:
-      - run: echo '${{github.event.workflow_run}}'
+      - name: Check out the code from the pull request
+        uses: actions/checkout@v4
+        with:
+          ref: ${{github.event.workflow_run.head_commit.id}}
+          set-safe-directory: false
+      - name: TODO
+        run: date > bar.txt
+      - run: |
+          git switch --create untrusted-hello
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m 'Automatic changes'
+          git push origin untrusted-hello
