@@ -15,3 +15,10 @@ jobs:
           repository: ${{github.event.workflow_run.head_repository.full_name}}
           ref: ${{github.event.workflow_run.head_commit.id}}
           set-safe-directory: false
+      - name: TODO
+        run: date > bar.txt
+      - run: |
+          git add .
+          git commit -m 'Automatic changes'
+          git remote add upstream '${{ github.repository }}'
+          git push upstream HEAD:untrusted-hello
