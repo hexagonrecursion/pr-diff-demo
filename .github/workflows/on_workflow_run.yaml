@@ -9,5 +9,8 @@ jobs:
     runs-on: ubuntu-24.04
     if: github.event.workflow_run.conclusion == 'failure'
     steps:
-      - run: echo '${{github.event.workflow_run.repository.full_name}}'
-      - run: echo '${{github.event.workflow_run.head_repository.full_name}}'
+      - name: Check out the code from the pull request
+        uses: actions/checkout@v4
+        with:
+          repository: ${{github.event.workflow_run.head_repository.full_name}}
+          ref: ${{github.event.workflow_run.head_commit.id}}
