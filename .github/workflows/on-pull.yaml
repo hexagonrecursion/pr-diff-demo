@@ -8,6 +8,14 @@ jobs:
   on-pull:
     runs-on: ubuntu-24.04
     steps:
+    - name: Set color
+      id: color-selector
+      run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
+    - name: Get color
+      env:
+          SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
+      run: echo "The selected color is $SELECTED_COLOR"
+
     - uses: actions/checkout@v4
     - run: date > hello.txt
     - run: git diff --quiet && echo "has_diff=true" || echo "has_diff=false" >> "$GITHUB_OUTPUT"
